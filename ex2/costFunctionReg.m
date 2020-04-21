@@ -17,8 +17,12 @@ m = length(y); % number of training examples
 
 
 h = sigmoid(X*theta);
-J = costFunction(theta, X, y) + lambda/(2*m) * sum(theta.^2);
+J = costFunction(theta, X, y) + lambda/(2*m) * sum(theta(2:end).^2);
+
 grad = 1/m * X'*(h-y);
+for i = 2:length(grad)
+  grad(i) = grad(i) + lambda/m * theta(i);
+endfor
 
 % =============================================================
 
