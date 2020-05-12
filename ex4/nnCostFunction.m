@@ -38,7 +38,32 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
-%
+
+yv = zeros(m, num_labels);
+for i = 1:m
+  yv(i, y(i)) = 1;
+end
+
+h1 = sigmoid([ones(m, 1) X] * Theta1');
+h = sigmoid([ones(m, 1) h1] * Theta2');
+
+J = (-yv.*log(h) - (1-yv).*log(1-h));
+J= 1/m * sum(sum(J));
+ 
+%for i = 1:num_labels
+%  h1 = sigmoid([1 X(i,:)] * Theta1');
+%  h2 = sigmoid([1 h1] * Theta2');
+%  h=h2';
+
+%  yv = zeros(10, 1);
+%  yv(y(i)) = 1;
+  
+%  J = J + (-yv'*log(h) - (1-yv)'*log(1-h));
+%endfor
+
+%J = J/m;
+
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -61,7 +86,6 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
 
 
 
