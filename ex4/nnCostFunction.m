@@ -40,9 +40,12 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 
 yv = eye(num_labels)(y,:);
-h1 = sigmoid([ones(m, 1) X] * Theta1');
-h = sigmoid([ones(m, 1) h1] * Theta2');
-Jm = (-yv.*log(h) - (1-yv).*log(1-h));
+z2 = [ones(m, 1) X] * Theta1';
+a2 = sigmoid(z2);
+z3 = [ones(m, 1) a2] * Theta2';
+a3 = sigmoid(z3);
+
+Jm = (-yv.*log(a3) - (1-yv).*log(1-a3));
 J = 1/m * sum(sum(Jm));
 
 J = J + lambda/(2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
@@ -64,6 +67,8 @@ J = J + lambda/(2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^
 %               first time.
 %
 
+%delta3 = a3 - y;
+%delta2 = (Theta2(:,2:end)' * delta3) .* sigmoidGradient(z2);
 
 
 
