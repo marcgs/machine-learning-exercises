@@ -44,19 +44,8 @@ h1 = sigmoid([ones(m, 1) X] * Theta1');
 h = sigmoid([ones(m, 1) h1] * Theta2');
 Jm = (-yv.*log(h) - (1-yv).*log(1-h));
 J = 1/m * sum(sum(Jm));
- 
-%for i = 1:num_labels
-%  h1 = sigmoid([1 X(i,:)] * Theta1');
-%  h2 = sigmoid([1 h1] * Theta2');
-%  h=h2';
 
-%  yv = zeros(10, 1);
-%  yv(y(i)) = 1;
-  
-%  J = J + (-yv'*log(h) - (1-yv)'*log(1-h));
-%endfor
-
-%J = J/m;
+J = J + lambda/(2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -74,6 +63,10 @@ J = 1/m * sum(sum(Jm));
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
