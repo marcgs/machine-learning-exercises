@@ -39,16 +39,11 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 
-yv = zeros(m, num_labels);
-for i = 1:m
-  yv(i, y(i)) = 1;
-end
-
+yv = eye(num_labels)(y,:);
 h1 = sigmoid([ones(m, 1) X] * Theta1');
 h = sigmoid([ones(m, 1) h1] * Theta2');
-
-J = (-yv.*log(h) - (1-yv).*log(1-h));
-J= 1/m * sum(sum(J));
+Jm = (-yv.*log(h) - (1-yv).*log(1-h));
+J = 1/m * sum(sum(Jm));
  
 %for i = 1:num_labels
 %  h1 = sigmoid([1 X(i,:)] * Theta1');
