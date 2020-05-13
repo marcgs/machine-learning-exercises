@@ -68,7 +68,7 @@ J = J + lambda/(2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^
 %               first time.
 %
 
-delta3 = a3 - y;
+delta3 = a3 - yv;
 delta2 = (delta3 * Theta2(:,2:end)) .* sigmoidGradient(z2);
 
 Delta1 = delta2' * a1;
