@@ -9,7 +9,7 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 
 % You need to return the following variables correctly.
 C = 1;
-sigma = 0.3;
+sigma = 0.1;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return the optimal C and sigma
@@ -39,8 +39,6 @@ for iC=C_list
     index++;
   endfor
 endfor
-
-results
 
 [v i] = min(results(:,3));
 C=results(i, 1);
