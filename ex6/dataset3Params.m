@@ -23,11 +23,28 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+C_list = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+sigma_list = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
+% create a blank results matrix
+results = zeros(length(C_list) * length(sigma_list), 3);
+index = 1;
 
+for iC=C_list
+  for jSigma=sigma_list
+    model= svmTrain(X, y, iC, @(x1, x2) gaussianKernel(x1, x2, jSigma));
+    predictions = svmPredict(model, Xval);
+    error = mean(double(predictions ~= yval));
+    results(index,:) = [iC jSigma error];
+    index++;
+  endfor
+endfor
 
+results
 
-
+[v i] = min(results(:,3));
+C=results(i, 1);
+sigma=results(i, 2);
 
 % =========================================================================
 
