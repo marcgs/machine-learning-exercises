@@ -25,7 +25,8 @@ sigma2 = zeros(n, 1);
 
 mu = mean(X);
 Xc = bsxfun(@minus, X, mu);
-sigma2 = 1/m * Xc'*Xc
+sigma2 = 1/m * sum(Xc.^2);
+%sigma2=var(X);
 
 
 
