@@ -23,10 +23,9 @@ sigma2 = zeros(n, 1);
 
 
 
-
-
-
-
+mu = mean(X);
+Xc = bsxfun(@minus, X, mu);
+sigma2 = 1/m * Xc'*Xc
 
 
 
